@@ -1,2 +1,2 @@
 # TypescriptProject
-Learning typescript with react
+Learning TypeScript with React and Node
