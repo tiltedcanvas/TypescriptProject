@@ -1,4 +1,4 @@
-# TypescriptProject
+# TypeScript Projects
 _Learning TypeScript with React and Node_
 
 
