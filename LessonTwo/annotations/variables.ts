@@ -61,18 +61,21 @@ const logNumber: (i: number) => void = (i: number) => {
 // : (i: number) => void 
 // This is not a function that runs, it's a description of a function
 
-
-
 // NOTE
 // we could delete all annotations in
 // this file and it will still know the correct ones.
 // This is because of type inference
 
+// ==========================================
 // When to use annotations
-// 1) function that returns the 'any'
-const json = '{"x": 10, "y": 20}';
-const coordinates = JSON.parse(json);
-console.log(coordinates); // {x: 10, y: 20};
+// ==========================================
+
+// 1) function that returns the 'any':
+
+// const json = '{"x": 10, "y": 20}';
+// const coordinates = JSON.parse(json);
+// console.log(coordinates); // {x: 10, y: 20};
+
 // if you hover over coordinates it returns the 'any'
 // ==========================================
 // 'false' -> JSON.parse() -> boolean
@@ -80,9 +83,63 @@ console.log(coordinates); // {x: 10, y: 20};
 // '{"value": 5}' -> JSON.parse() -> {value: number}
 // '{"name": "alex"}' -> JSON.parse() -> {name: string}
 // ==========================================
+
 // you can clearly pass in different strings into function and get back varied value Types back
 // this diagram helps you understand that whenever you call
 // JSON.parse, it can give all these different Types
 // because of this, it can't guess with inference 
 // it can't predict so it names it as 'any'
 // therefore we have to declare
+
+// we could fix this 'any' by adding a type to coordinates
+const json = '{"x": 10, "y": 20}';
+const coordinates: { x: number; y: number; } = JSON.parse(json);
+console.log(coordinates);
+
+
+// 2) When we declare a variable on one line and initalize it later
+
+// let words = ['red', 'green', 'blue'];
+// let foundWord;
+	// 	for (let i = 0; i < words.length; i++) {
+	//		if (words[i] === 'green') {
+	//			foundWord = true;
+	//		}
+	//	}
+
+let words = ['red', 'green', 'blue'];
+let foundWord: boolean;
+for (let i = 0; i < words.length; i++) {
+	if (words[i] === 'green') {
+		foundWord = true;
+	}
+}
+
+// 3) Variable whose type cannot be inferred correctly
+
+
+// i want to iterate through the numbers array and if we find a number greater than zero, assign it to numberAboveZero, otherwise assign 'false'. 
+
+// two types of values will be assigned to this variable, this is not always recommended but could have cases in things such as filtering etc.
+
+
+
+// this function will reutrn an any
+// let numbers = [-10, -1, 12];
+// let numberAboveZero;
+// for (let i = 0; i < numbers.length; i++) {
+// 	if (numbers[i] > 0) {
+// 		numberAboveZero = numbers[i];
+// 	}
+// }
+
+let numbers = [-10, -1, 12];
+let numberAboveZero: boolean | number = false;
+
+for (let i = 0; i < numbers.length; i++) {
+	if (numbers[i] > 0) {
+		numberAboveZero = numbers[i];
+	}
+}
+
+
